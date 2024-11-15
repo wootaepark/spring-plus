@@ -11,10 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.expert.domain.user.enums.UserRole;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
-@Slf4j
+@Slf4j(topic = "JwtFilter 실행")
 @RequiredArgsConstructor
 public class JwtFilter implements Filter {
 
@@ -31,7 +33,7 @@ public class JwtFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         String url = httpRequest.getRequestURI();
-
+        log.info("JwtFilter 실행됨");
         if (url.startsWith("/auth")) {
             chain.doFilter(request, response);
             return;
